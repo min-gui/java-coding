@@ -1,3 +1,4 @@
+import javax.swing.text.html.Option;
 import java.util.*;
 
 public class Main {
@@ -10,67 +11,27 @@ public class Main {
      ***/
 
     public static void main(String[] args) {
-        Main main = new Main();
-        main.solution();
-    }
 
-    int[][] map;
-    boolean[][] visited;
-    int[] dy = {0, 1, 0, -1};
-    int[] dx = {1, 0, -1, 0};
-    int eachCnt = 0;
-    List<Integer> arr = new ArrayList<>();
-    int mapSize = 0;
+        List<User> list = new ArrayList<>();
 
-    public void solution() {
+        User user1 = new User();
+        user1.setName("min");
+        list.add(user1);
 
-        Scanner sc = new Scanner(System.in);
-        mapSize = sc.nextInt();
-        map = new int[mapSize][mapSize];
-        visited = new boolean[mapSize][mapSize];
+        User user2 = new User();
+        user2.setName("min2");
+        list.add(user2);
 
-        for (int i = 0; i < mapSize; i++) {
-            String input = sc.next();
-            for (int j = 0; j < mapSize; j++) {
-                map[i][j] = input.charAt(j) - '0';
-            }
-        }
+        Optional<User> result = list.stream()
+                .filter(user -> user.getName().equals("min1"))
+                .findAny();
 
-        //탐색
-        for (int i = 0; i < mapSize; i++) {
-            for (int j = 0; j < mapSize; j++) {
-                if (!visited[i][j] && map[i][j] == 1) {
-                    visited[i][j] = true;
-                    eachCnt = 0;
-                    dfs(j, i);
-                    arr.add(eachCnt);
+        result.ifPresent(m -> {
+                    System.out.println("값이 중복이다.");
                 }
-            }
-        }
+        );
 
-        Collections.sort(arr);
-
-        System.out.println(arr.size());
-        for (int i : arr) {
-            System.out.println(i);
-        }
     }
-
-    public void dfs(int x, int y) {
-        eachCnt++;
-        for (int i = 0; i < 4; i++) {
-            int nextX = dx[i] + x;
-            int nextY = dy[i] + y;
-
-            if ((0 <= nextX && nextX < mapSize) && (0 <= nextY && nextY < mapSize)) {
-                if (map[nextY][nextX] == 1 && !visited[nextY][nextX]) {
-                    visited[nextY][nextX] = true;
-                    dfs(nextX, nextY);
-                }
-            }
-        }
-    }
-
 
 }
 

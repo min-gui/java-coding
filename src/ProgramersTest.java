@@ -1,73 +1,57 @@
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.*;
 
 public class ProgramersTest {
     public static void main(String[] args) {
         ProgramersTest programersTest = new ProgramersTest();
-        System.out.println(programersTest.solution("BBAABB"));
-
-
+        System.out.println(programersTest.solution(
+                9, new int[][]{{1, 3}, {2, 3}, {3, 4}, {4, 5}, {4, 6}, {4, 7}, {7, 8}, {7, 9}}));
     }
 
-    public int solution1(String name) {
-        int answer = 0;
-        char tempName = 'A';
-        int seriseCheck = 0;
-        int totalCnt = 0;
 
-        //for (int j = 0; j < 2; j++) {
-        //알파벳 값.
-        int alphCnt = 0;
-        for (int i = 0; i < name.length(); i++) {
+    int[][] map;
 
-            name.charAt(i); // 74 - 65, 91 - 74
-            int up = name.charAt(i) - 65;
-            int down = 91 - name.charAt(i);
-            alphCnt += Math.min(up, down);
+    public int solution(int n, int[][] wires) {
+        int answer = n;
+        map = new int[n + 1][n + 1];
+        for (int i = 0; i < wires.length; i++) {
+            map[wires[i][0]][wires[i][1]] = 1;
+            map[wires[i][1]][wires[i][0]] = 1;
+        }
 
-            System.out.println(alphCnt);
-            if (name.charAt(i) == tempName && name.length()-1 != i) {
-                seriseCheck++;
-            } else {
-                System.out.println("serise "+seriseCheck);
-                totalCnt = Math.max(seriseCheck, totalCnt);
-                seriseCheck = 0;
+        for (int i = 0; i < wires.length; i++) {
+            int a = wires[i][0];
+            int b = wires[i][1];
+
+            map[a][b] = 0;
+            map[b][a] = 0;
+            answer = Math.min(answer, serach(n,a));
+            map[a][b] = 1;
+            map[b][a] = 1;
+        }
+
+
+        return answer;
+    }
+
+    public int serach(int n, int start) {
+        boolean[] visited = new boolean[n + 1];
+        int cnt = 1;
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(start);
+
+        while (!queue.isEmpty()) {
+            int point = queue.poll();
+            visited[point] = true;
+
+            for (int i = 1; i <= n; i++) {
+                if (visited[i]) continue;
+                if (map[point][i] == 1) {
+                    queue.offer(i);
+                    cnt++;
+                }
             }
         }
-        System.out.println(alphCnt);
-        int way = Math.min(name.length() - 1, name.length() - 1 -totalCnt);
-        answer = way + alphCnt;
-
-
-        return answer;
-    }
-
-    static public int solution(String name) {
-        int answer = 0;
-
-        int len = name.length();
-
-        //최대로 가질 수 있는 min값은 끝까지 가는것
-        int min_move = len-1;
-
-        for(int i=0; i<len; i++) {
-            answer += Math.min(name.charAt(i)-'A', 'Z'-name.charAt(i)+1);
-
-            //좌우: 연속된 A의 등장에 따라 최소 움직임이 달라진다
-            int next = i+1;// 현재 다음 위치부터
-            //내 다음이 A라면 계속 NEXT++
-            while(next<len && name.charAt(next) == 'A')
-                next++;
-
-            min_move = Math.min(min_move, i+len-next + i);
-        }//for
-
-        answer += min_move;
-
-        return answer;
+        return (int) Math.abs(n - 2 * cnt);
     }
 
 
