@@ -3,13 +3,6 @@ import java.util.*;
 
 public class Main {
 
-    /***
-     *
-     * 1. 아이디어
-     *  이중포문으로 돌며 방문X 또는 1 일경우 탐색
-     *
-     ***/
-
     public static void main(String[] args) {
 
         List<User> list = new ArrayList<>();
