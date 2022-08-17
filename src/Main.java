@@ -2,28 +2,58 @@ import javax.swing.text.html.Option;
 import java.util.*;
 
 public class Main {
-
+    static boolean[] visted;
+    static ArrayList<ArrayList<Integer>> arr;
     public static void main(String[] args) {
+        int answer = 0;
+        Scanner sc = new Scanner(System.in);
 
-        List<User> list = new ArrayList<>();
+        //정점의 갯수
+        int N = sc.nextInt();
+        //간선의 갯수
+        int M = sc.nextInt();
 
-        User user1 = new User();
-        user1.setName("min");
-        list.add(user1);
+        visted = new boolean[N + 1];
+        arr = new ArrayList<>();
+        for (int i = 0; i < N + 1; i++) {
+            arr.add(new ArrayList<>());
+        }
+        for (int i = 0; i < M; i++) {
+            int u = sc.nextInt();
+            int v = sc.nextInt();
 
-        User user2 = new User();
-        user2.setName("min2");
-        list.add(user2);
+            arr.get(u).add(v);
+            arr.get(v).add(u);
+        }
 
-        Optional<User> result = list.stream()
-                .filter(user -> user.getName().equals("min1"))
-                .findAny();
+        for (int i = 1 ; i <= N ;i++){
+            if (!visted[i]){
+                search(i);
+                answer++;
+            }
+        }
+        System.out.println(answer);
 
-        result.ifPresent(m -> {
-                    System.out.println("값이 중복이다.");
+    }
+
+
+    static public void search(int start){
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(start);
+
+        while (!queue.isEmpty()){
+            int a = queue.poll();
+            visted[a] = true;
+            for (int i = 0 ; i < arr.get(a).size() ; i++){
+                int value = arr.get(a).get(i);
+                if (!visted[value]){
+                    visted[value] = true;
+                    queue.add(value);
                 }
-        );
 
+            }
+
+        }
     }
 
 }
