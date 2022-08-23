@@ -1,87 +1,40 @@
+import java.util.Arrays;
 import java.util.Scanner;
+
 public class Main {
 
-    public static int[] stack;
-    public static int size = 0;
-
+    static int[] arr = new int[9];
+    static int sum = 0;
 
     public static void main(String[] args) {
 
-        Scanner in = new Scanner(System.in);
-        StringBuilder sb = new StringBuilder();
+        Scanner sc = new Scanner(System.in);
 
-        int N = in.nextInt();
+        for (int i = 0; i < 9; i++) {
+            arr[i] = sc.nextInt();
+            sum += arr[i];
 
-        stack = new int[N];
+        }
+        search();
 
-        for(int i = 0; i < N; i++) {
+    }
 
-            String str = in.next();
+    static void search() {
+        for (int i = 0; i < 8; i++) {
+            for (int k = i + 1; k < 9; k++) {
+                if (sum - arr[i] - arr[k] == 100) {
+                    arr[i] = 0;
+                    arr[k] = 0;
 
-            switch (str) {
+                    Arrays.sort(arr);
+                    for (int j = 2; j < 9; j++) {
+                        System.out.println(arr[j]);
 
-                case "push":
-                    push(in.nextInt());
-                    break;
+                    }
 
-                case "pop":
-                    sb.append(pop()).append('\n');
-                    break;
-
-                case "size":
-                    sb.append(size()).append('\n');
-                    break;
-
-                case "empty":
-                    sb.append(empty()).append('\n');
-                    break;
-
-                case "top":
-                    sb.append(top()).append('\n');
-                    break;
+                    return;
+                }
             }
-
-        }
-        System.out.println(sb);
-    }
-
-    public static void push(int item) {
-        stack[size] = item;
-        size++;
-    }
-
-    public static int pop() {
-        if(size == 0) {
-            return -1;
-        }
-        else {
-            int res = stack[size - 1];
-            stack[size - 1] = 0;
-            size--;
-            return res;
         }
     }
-
-    public static int size() {
-        return size;
-    }
-
-    public static int empty() {
-        if(size == 0) {
-            return 1;
-        }
-        else {
-            return 0;
-        }
-    }
-
-    public static int top() {
-        if(size == 0) {
-            return -1;
-        }
-        else {
-            return stack[size - 1];
-        }
-    }
-
 }
