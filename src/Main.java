@@ -5,25 +5,37 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int cnt = 0;
-        int E = sc.nextInt();
-        int S = sc.nextInt();
+        int N = sc.nextInt();
+
         int M = sc.nextInt();
 
-        while (true) {
-            cnt++;
-            int eNa = cnt % 15;
-            int sNa = cnt % 28;
-            int mNa = cnt % 19;
-            if (eNa == 0) eNa = 15 ;
-            if (sNa == 0) sNa = 28 ;
-            if (mNa == 0) mNa = 19 ;
+        boolean[] button = new boolean[10];
 
-            if (eNa == E && sNa == S && mNa == M){
-                break;
+        //고장난 버튼 추가
+        for (int i = 0; i < M; i++) {
+            button[sc.nextInt()] = true;
+        }
+
+        int result = Math.abs(N - 100);
+
+        for (int i = 0; i <= 999999; i++) {
+            String temp = String.valueOf(i);
+
+            boolean breaking = false;
+
+            for (int j = 0; j < temp.length(); j++) {
+                if (button[temp.charAt(j) - '0']) {
+                    breaking = true;
+                    break;
+
+                }
+            }
+
+            if (!breaking) {
+                int min = Math.abs(N - i) + temp.length();
+                result = Math.min(result, min);
             }
         }
-        System.out.println(cnt);
-
+        System.out.println(result);
     }
 }
