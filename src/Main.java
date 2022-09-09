@@ -1,26 +1,36 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        int cnt = Integer.parseInt(sc.nextLine());
+        int num = sc.nextInt();
+        int cnt = 1;
+        ArrayList<String> answer = new ArrayList<>();
+        Stack<Integer> stack = new Stack<>();
 
+        for (int i = 1; i <= num; i++) {
+            int inputNum = sc.nextInt();
+            while (cnt<=inputNum){
+                stack.add(cnt);
+                answer.add("+");
+                cnt++;
+            }
 
-        for (int i = 0; i < cnt; i++) {
-            String[] s = sc.nextLine().split(" ");
-            for (String item : s) {
-                System.out.print(reverse(item) + " ");
+            if (stack.peek() == inputNum){
+                stack.pop();
+                answer.add("-");
+            }else{
+                answer.clear();
+                System.out.println("NO");
+                break;
             }
         }
 
-    }
+        for (String i : answer){
+            System.out.println(i);
+        }
 
-    public static String reverse(String str) {
-        return new StringBuilder(str).reverse().toString();
     }
-
 }
