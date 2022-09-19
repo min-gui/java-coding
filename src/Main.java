@@ -1,94 +1,71 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    static int[] dx = {1, 0, -1, 0};
+    static int[] dy = {0, -1, 0, 1};
+    static int n;
+    static int m;
+    static int[][] map;
+    static boolean[][] visited;
+    static int min = 200;
 
-        String text = sc.next();
-        Point point = new Point(text, text.length());
-        int forNum = sc.nextInt();
-        for (int i = 0; i < forNum; i++) {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
 
-            String input = sc.next();
+        map = new int[n + 1][m + 1];
+        visited = new boolean[n + 1][m + 1];
 
-            switch (input.charAt(0)) {
-                case 'P':
-                    String str = sc.next();
-                    input(point, str);
-                    break;
-                case 'L':
-                    left(point);
-                    break;
-                case 'D':
-                    right(point);
-                    break;
-                case 'B':
-                    delete(point);
-                    break;
-
+        for (int i = 1; i <= n; i++) {
+            String s = br.readLine();
+            for (int j = 1; j <= m; j++) {
+                map[i][j] = s.charAt(j - 1) - '0';
             }
-
         }
 
-        System.out.println(point.getStr());
-
+        bfs();
+        System.out.println(map[n][m]);
 
     }
 
-    static void left(Point point) {
-        if (point.position != 0) {
-            point.setPosition(point.position - 1);
+    public static void bfs() {
+        Queue<Point> queue = new LinkedList<>();
+        queue.add(new Point(1, 1));
+        while (!queue.isEmpty()) {
+            Point p = queue.poll();
+            visited[p.y][p.x] = true;
+            System.out.println(p.y + " " + p.x);
+
+            for (int i = 0; i < 4; i++) {
+                int nextX = p.x + dx[i];
+                int nextY = p.y + dy[i];
+
+                if (nextX > 0 && nextY > 0 && nextX <= m && nextY <= n) {
+                    if (!visited[nextY][nextX] && map[nextY][nextX] == 1) {
+                        queue.add(new Point(nextX, nextY));
+                        map[nextY][nextX] = map[p.y][p.x] + 1;
+
+                    }
+                }
+            }
         }
-    }
 
-    static void right(Point point) {
-        if (point.position == point.str.length()) {
-            point.setPosition(point.position);
-        } else {
-            point.setPosition(point.position + 1);
-        }
-    }
-
-    static void delete(Point point) {
-
-        if (point.position == point.str.length()) {
-            point.setStr(point.str.substring(0, point.position - 1));
-            point.setPosition(point.str.length());
-        } else if (point.position > 0) {
-            String tmep = point.str.substring(0, point.position - 1)
-                    + point.str.substring(point.position);
-            point.setStr(tmep);
-        }
-    }
-
-    static void input(Point point, String item) {
-        String tmep = point.str.substring(0, point.position)
-                + item + point.str.substring(point.position);
-
-        point.setPosition(point.position + 1);
-        point.setStr(tmep);
     }
 
     static class Point {
-        private String str;
-        private int position;
+        int x;
+        int y;
 
-        public Point(String str, int position) {
-            this.str = str;
-            this.position = position;
-        }
-
-        public void setPosition(int position) {
-            this.position = position;
-        }
-
-        public void setStr(String str) {
-            this.str = str;
-        }
-
-        public String getStr() {
-            return str;
+        Point(int x, int y) {
+            this.x = x;
+            this.y = y;
         }
     }
+
 }
