@@ -13,12 +13,11 @@ fun main() = with(System.`in`.bufferedReader()) {
 
     array = Array(M) { 0 }
     visted = Array(N) { false }
-    dfs(N, M, 0)
-
+    dfs(0, N, M, 0)
 
 }
 
-fun dfs(N: Int, M: Int, depth: Int) {
+fun dfs(start: Int, N: Int, M: Int, depth: Int) {
 
     if (M == depth) {
         for (i: Int in array) {
@@ -28,14 +27,13 @@ fun dfs(N: Int, M: Int, depth: Int) {
         return
     }
 
-    for (i: Int in 0 until N) {
+    for (i: Int in start until N) {
         if (!visted[i]) {
             visted[i] = true;
             array[depth] = i + 1;
-            dfs(N, M, depth + 1)
+            dfs(i + 1, N, M, depth + 1)
             visted[i] = false
         }
     }
-
 }
 

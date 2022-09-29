@@ -15,22 +15,20 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
+
         int N = sc.nextInt();
         int M = sc.nextInt();
-
         arr = new int[M];
         visited = new boolean[N];
 
-        dfs(N,M,0);
-
+        dfs(0,N,M,0);
 
     }
 
 
-    static void dfs(int N, int M, int depth) {
+    static void dfs(int start, int N, int M, int depth) {
 
-        //행의 길이가 끝까지 탐색 했을때 출력
-        if (depth == M) {
+        if (M == depth) {
             for (int i : arr) {
                 System.out.print(i + " ");
             }
@@ -38,17 +36,16 @@ public class Main {
             return;
         }
 
-        // N 까지 탐색.
-        for (int i = 0; i < N; i++) {
+        for (int i = start; i < N; i++) {
             if (!visited[i]) {
                 visited[i] = true;
                 arr[depth] = i + 1;
-                dfs(N, M, depth + 1);
-                //끝까지 탐색하고 나왔을경우 기존 방문했던 곳을 false 로.
+                dfs(i + 1, N, M, depth+1);
                 visited[i] = false;
             }
-        }
 
+        }
+        
     }
 
 }
