@@ -1,71 +1,54 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.*;
+import java.util.Scanner;
+
 
 public class Main {
 
-    static int[] dx = {1, 0, -1, 0};
-    static int[] dy = {0, -1, 0, 1};
-    static int n;
-    static int m;
-    static int[][] map;
-    static boolean[][] visited;
-    static int min = 200;
+    /*
+    1. 아이디어
+    모든 순서가 나오게 출력.
+    하나의 열에 모든 수의 조함이 나와야된다.
+     */
+
+    static int arr[];
+    static boolean visited[];
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        n = Integer.parseInt(st.nextToken());
-        m = Integer.parseInt(st.nextToken());
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int M = sc.nextInt();
 
-        map = new int[n + 1][m + 1];
-        visited = new boolean[n + 1][m + 1];
+        arr = new int[M];
+        visited = new boolean[N];
 
-        for (int i = 1; i <= n; i++) {
-            String s = br.readLine();
-            for (int j = 1; j <= m; j++) {
-                map[i][j] = s.charAt(j - 1) - '0';
-            }
-        }
+        dfs(N,M,0);
 
-        bfs();
-        System.out.println(map[n][m]);
 
     }
 
-    public static void bfs() {
-        Queue<Point> queue = new LinkedList<>();
-        queue.add(new Point(1, 1));
-        while (!queue.isEmpty()) {
-            Point p = queue.poll();
-            visited[p.y][p.x] = true;
-            System.out.println(p.y + " " + p.x);
 
-            for (int i = 0; i < 4; i++) {
-                int nextX = p.x + dx[i];
-                int nextY = p.y + dy[i];
+    static void dfs(int N, int M, int depth) {
 
-                if (nextX > 0 && nextY > 0 && nextX <= m && nextY <= n) {
-                    if (!visited[nextY][nextX] && map[nextY][nextX] == 1) {
-                        queue.add(new Point(nextX, nextY));
-                        map[nextY][nextX] = map[p.y][p.x] + 1;
+        //행의 길이가 끝까지 탐색 했을때 출력
+        if (depth == M) {
+            for (int i : arr) {
+                System.out.print(i + " ");
+            }
+            System.out.println();
+            return;
+        }
 
-                    }
-                }
+        // N 까지 탐색.
+        for (int i = 0; i < N; i++) {
+            if (!visited[i]) {
+                visited[i] = true;
+                arr[depth] = i + 1;
+                dfs(N, M, depth + 1);
+                //끝까지 탐색하고 나왔을경우 기존 방문했던 곳을 false 로.
+                visited[i] = false;
             }
         }
 
-    }
-
-    static class Point {
-        int x;
-        int y;
-
-        Point(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
     }
 
 }

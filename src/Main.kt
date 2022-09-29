@@ -1,61 +1,41 @@
-import java.util.Arrays
-import java.util.LinkedList
-import java.util.Queue
+var N = 0
+var M = 0
 
-var dx = intArrayOf(-1, 0, 1, 0)
-var dy = intArrayOf(0, -1, 0, 1)
-
-var n = 0
-var m = 0
-
-lateinit var map: Array<Array<Int>>
-lateinit var visit: Array<Array<Boolean>>
+lateinit var array: Array<Int>
+lateinit var visted: Array<Boolean>
 
 fun main() = with(System.`in`.bufferedReader()) {
 
     val tmp = readLine().split(" ").map { it.toInt() }
 
-    n = tmp[0]
-    m = tmp[1]
+    N = tmp[0]
+    M = tmp[1]
 
-    map = Array(n + 1) { Array(m + 1) { 0 } }
-    visit = Array(n + 1) { Array(m + 1) { false } }
-
-    for (i in 1..n) {
-        val line = readLine().toString();
-        for (j in 0 until m)
-            map[i][j + 1] = line[j] - '0'
-    }
-
-
-    bfs()
-    println(map[n][m])
+    array = Array(M) { 0 }
+    visted = Array(N) { false }
+    dfs(N, M, 0)
 
 
 }
 
-fun bfs() {
-    var queue: Queue<Point> = LinkedList()
-    queue.add(Point(1, 1))
+fun dfs(N: Int, M: Int, depth: Int) {
 
-    while (!queue.isEmpty()) {
-        val p = queue.poll()
-        visit[p.y][p.x] = true
-        for (i in 0 until 4) {
+    if (M == depth) {
+        for (i: Int in array) {
+            print("$i ")
+        }
+        println()
+        return
+    }
 
-            var nextX = p.x + dx[i]
-            var nextY = p.y + dy[i]
-
-            // 0 보다 크고 해당 하는 범위보다 작게.
-            if (0 < nextX && 0 < nextY && nextX <= m && nextY <= n) {
-                if (!visit[nextY][nextX] && map[nextY][nextX] == 1) {
-                    queue.add(Point(nextX, nextY))
-                    map[nextY][nextX] = map[p.y][p.x] + 1
-                }
-            }
+    for (i: Int in 0 until N) {
+        if (!visted[i]) {
+            visted[i] = true;
+            array[depth] = i + 1;
+            dfs(N, M, depth + 1)
+            visted[i] = false
         }
     }
 
 }
 
-data class Point(var x: Int, var y: Int)
