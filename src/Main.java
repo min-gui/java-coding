@@ -1,76 +1,35 @@
-import java.io.IOException;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
-
+import java.util.*;
 
 public class Main {
 
-    /**
-     * 1. 아이디어
-     * 문서의 개수 N, 몇번째에 놓여 있는지 M, N개 문서의 중요도가 차례로 나온다.
-     * - 구현
-     * 구분표현을 만든다.
-     * 번지수, 중요도.
-     * 들어오는 가장 큰 수를 찾는다.
-     */
 
-    static int arr[];
-    static boolean visited[];
-    static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) {
 
-    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        int cnt = 1;
+        int N = sc.nextInt();
+        int[][] lectures = new int[N][2];
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
 
-        int testCase = sc.nextInt();
+        for (int i = 0; i < N; i++) {
+            int si = sc.nextInt();
+            int ti = sc.nextInt();
+            lectures[i][0] = si;
+            lectures[i][1] = ti;
+        }
 
-        for (int i = 0; i < testCase; i++) {
-            int N = sc.nextInt();
-            int M = sc.nextInt();
-            int MAX = 0;
-            int cnt = 0;
-
-            Queue<Point> queue = new LinkedList<>();
-            for (int j = 0; j < N; j++) {
-                int value = sc.nextInt();
-                MAX = Math.max(MAX, value);
-                queue.add(new Point(value, j));
+        Arrays.sort(lectures, Comparator.comparing(o1 -> o1[0]));
+        //강의 끝나는 시간 추가.
+        queue.add(lectures[0][1]);
+        for (int i = 1; i < N; i++) {
+            if (queue.peek() <= lectures[i][0]){
+                queue.poll();
             }
+            queue.add(lectures[i][1]);
 
-            while (!queue.isEmpty()){
-
-                Point nowP = queue.poll();
-                boolean flag = true;
-
-                for (Point p : queue){
-                    if (nowP.value < p.value){
-                        flag = false;
-                        break;
-                    }
-                }
-
-                if (flag){
-                    cnt++;
-                    if (nowP.turn==M){
-                        System.out.println("cnt = " + cnt);
-                        break;
-                    }
-                }else {
-                    queue.add(nowP);
-                }
-            }
 
         }
+        System.out.println(queue.size());
     }
-
-    public static class Point {
-        int value;
-        int turn;
-
-        public Point(int value, int turn) {
-            this.value = value;
-            this.turn = turn;
-        }
-    }
-
 
 }
