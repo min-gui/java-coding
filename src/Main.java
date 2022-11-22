@@ -2,60 +2,69 @@ import java.util.*;
 
 public class Main {
 
-    static int[] dx = {-1, 0, 1, 0};
-    static int[] dy = {0, -1, 0, 1};
-    static boolean[] visted;
+    static int[] dx = {-2, -1, 1, 2, 2, 1, -1, -2};
+    static int[] dy = {1, 2, 2, 1, -1, -2, -2, -1};
+    static boolean[][] visted;
     static int[][] map;
-    static int R = 0;
-    static int C = 0;
-    static int maxCnt = 0;
+    static int testCase = 0;
+    static int I = 0;
+    static int minCnt = 0;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        R = sc.nextInt();
-        C = sc.nextInt();
-        //아스키 코드 값 이용.
-        visted = new boolean[26];
-        map = new int[R][C];
+        testCase = sc.nextInt();
 
-        for (int i = 0; i < R; i++) {
-            String str = sc.next();
-            for (int j = 0; j < C; j++) {
-                map[i][j] = str.charAt(j) - 'A';
-            }
+        for (int i = 0; i < testCase; i++) {
+            I = sc.nextInt();
+            visted = new boolean[I][I];
+            map = new int[I][I];
+            int x1 = sc.nextInt();
+            int y1 = sc.nextInt();
+
+            int x2 = sc.nextInt();
+            int y2 = sc.nextInt();
+            search(new Point(x1, y1), new Point(x2, y2));
         }
 
-        dfs(new Horse(0, 0), 1);
-
-        System.out.println(maxCnt);
     }
 
-    public static void dfs(Horse horse, int inCnt) {
-        int x = horse.x;
-        int y = horse.y;
-        visted[map[y][x]] = true;
-        maxCnt = Math.max(maxCnt,inCnt);
-        for (int i = 0; i < 4; i++) {
-            int nextX = x + dx[i];
-            int nextY = y + dy[i];
-            if ((0 <= nextX && nextX < C) && (0 <= nextY && nextY < R)) {
-                if (!visted[map[nextY][nextX]]) {
-                    dfs(new Horse(nextX, nextY), inCnt+1);
-                    visted[map[nextY][nextX]] = false;
+    public static void search(Point start, Point end) {
+
+        Queue<Point> queue = new LinkedList<>();
+        queue.add(start);
+
+        while (!queue.isEmpty()) {
+            Point currentP = queue.poll();
+
+            if (currentP.x == end.x && currentP.y == end.y) {
+                System.out.println(map[currentP.y][currentP.x]);
+                return;
+            }
+
+            for (int i = 0; i < 8; i++) {
+                int nextX = currentP.x + dx[i];
+                int nextY = currentP.y + dy[i];
+                if (0 <= nextX && nextX < I && 0 <= nextY && nextY < I) {
+                    if (!visted[nextY][nextX]) {
+                        visted[nextY][nextX] = true;
+                        map[nextY][nextX] = map[currentP.y][currentP.x] + 1;
+                        queue.add(new Point(nextX, nextY));
+                    }
                 }
             }
         }
-
     }
-
-
-    static class Horse {
+    static class Point {
         int x, y;
 
-        public Horse(int x, int y) {
+        public Point(int x, int y) {
             this.x = x;
             this.y = y;
         }
     }
 
 }
+
+
+
+
