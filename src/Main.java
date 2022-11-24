@@ -8,44 +8,44 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
-        solution(4);
-    }
-
-    public static int solution(int N) {
-        // write your code in Java SE 11
-
-        int totalCnt = 0;
-        Point p = new Point();
-        while (true){
-            int na = N%2;
-            N = N/2;
+        int N = Integer.parseInt(bf.readLine());
+        int[][] lecture = new int[N][2];
+        int temp = 0;
 
 
-            if (na == 1){
-                p.is = true;
-                totalCnt = Math.max(totalCnt, p.cnt);
-                p.cnt = -1;
-
-            }
-
-            if(p.is == true){
-                p.cnt++;
-            }
-
-            if (N == 1){
-                totalCnt = Math.max(totalCnt, p.cnt);
-                break;
-            }
-
+        for (int i = 0; i < N; i++) {
+            StringTokenizer st = new StringTokenizer(bf.readLine());
+            int start = Integer.parseInt(st.nextToken());
+            int end = Integer.parseInt(st.nextToken());
+            lecture[i][0] = start;
+            lecture[i][1] = end;
         }
 
-        System.out.println(+totalCnt);
-        return 0;
+        Arrays.sort(lecture, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                if (o1[1] == o2[1]){
+                    return  o1[0] - o2[0];
+                }
+
+                return o1[1] - o2[1];
+            }
+        });
+
+        int cnt = 1;
+        temp = lecture[0][1];
+
+        for (int i = 1 ; i < N ; i++){
+            System.out.println(lecture[i][0]+" "+lecture[i][1]);
+            if(lecture[i][0] >= temp){
+                cnt++;
+                temp = lecture[i][1];
+            }
+        }
+        System.out.println(cnt);
+
     }
-    public static class Point{
-        int cnt=0;
-        //셀수 있는지 이전에 1이 나왔었는지 판별
-        boolean is = false;
-    }
+
 }
