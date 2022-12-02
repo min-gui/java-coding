@@ -1,51 +1,40 @@
-
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        int[] test = {3, 7, 4, 6, 5};
 
-        int N = Integer.parseInt(bf.readLine());
-        int[][] lecture = new int[N][2];
-        int temp = 0;
+        System.out.println(maxSubsetSum(test));
+    }
 
+    static int maxSubsetSum(int[] arr) {
+        int length = arr.length;
 
-        for (int i = 0; i < N; i++) {
-            StringTokenizer st = new StringTokenizer(bf.readLine());
-            int start = Integer.parseInt(st.nextToken());
-            int end = Integer.parseInt(st.nextToken());
-            lecture[i][0] = start;
-            lecture[i][1] = end;
+        if (length == 1) {
+            return arr[0];
+        } else if (length == 2) {
+            return arr[1] >= arr[0] ? arr[1] : arr[0];
+        }
+        int[] tempArr = new int[length + 1];
+        int totalCnt = -100000;
+        tempArr[0] = -100000;
+        tempArr[1] = arr[0];
+        tempArr[2] = arr[1];
+
+        for (int i = 2; i < length; i++) {
+            int tempMax = Math.max(tempArr[i - 1], tempArr[i - 2]);
+            if (arr[i] >= 0) {
+                tempArr[i + 1] = Math.max(tempMax + arr[i], arr[i]);
+            } else {
+                tempArr[i + 1] = tempMax;
+            }
+            totalCnt = Math.max(tempArr[i + 1],totalCnt);
         }
 
-        Arrays.sort(lecture, new Comparator<int[]>() {
-            @Override
-            public int compare(int[] o1, int[] o2) {
-                if (o1[1] == o2[1]){
-                    return  o1[0] - o2[0];
-                }
-
-                return o1[1] - o2[1];
-            }
-        });
-
-        int cnt = 1;
-        temp = lecture[0][1];
-
-        for (int i = 1 ; i < N ; i++){
-            System.out.println(lecture[i][0]+" "+lecture[i][1]);
-            if(lecture[i][0] >= temp){
-                cnt++;
-                temp = lecture[i][1];
-            }
-        }
-        System.out.println(cnt);
-
+        return totalCnt;
     }
 
 }
