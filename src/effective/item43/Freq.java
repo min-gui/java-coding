@@ -14,7 +14,7 @@ public class Freq {
 
         for (String s : strings)
             //빈도수 측정
-            frequencyTable.merge(s, 1,
+            frequencyTable.merge(s, 3,
                     (count, incr) -> count + incr);
 
         System.out.println(frequencyTable);

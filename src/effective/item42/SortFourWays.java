@@ -29,5 +29,6 @@ public class SortFourWays {
         words.sort(Comparator.comparing(String::length));
         System.out.println("words = " + words);
 
+        
     }
 }
