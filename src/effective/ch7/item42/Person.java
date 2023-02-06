@@ -1,4 +1,4 @@
-package effective.item42;
+package effective.ch7.item42;
 
 class Person
 {

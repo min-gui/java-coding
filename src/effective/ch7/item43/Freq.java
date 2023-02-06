@@ -1,4 +1,4 @@
-package effective.item43;
+package effective.ch7.item43;
 
 import java.util.Map;
 import java.util.TreeMap;

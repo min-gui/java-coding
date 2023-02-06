@@ -1,4 +1,4 @@
-package effective.item45.anagrams;
+package effective.ch7.item45.anagrams;
 
 import java.io.File;
 import java.io.IOException;
