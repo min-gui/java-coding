@@ -1,4 +1,4 @@
-package effective.ch2.hierarchicalbuilder;
+package effective.ch2.item2.hierarchicalbuilder;
 
 public class Calzone extends Pizza{
     private final boolean sauceInside;

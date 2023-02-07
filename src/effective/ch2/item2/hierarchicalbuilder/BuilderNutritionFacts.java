@@ -1,4 +1,4 @@
-package effective.ch2;
+package effective.ch2.item2.hierarchicalbuilder;
 
 public class BuilderNutritionFacts {
     //불변객체 유지 가능

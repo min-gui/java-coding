@@ -1,7 +1,7 @@
-package effective.ch2.hierarchicalbuilder;
+package effective.ch2.item2.hierarchicalbuilder;
 
-import static effective.ch2.hierarchicalbuilder.NyPizza.Size.SMALL;
-import static effective.ch2.hierarchicalbuilder.Pizza.Topping.*;
+import static effective.ch2.item2.hierarchicalbuilder.NyPizza.Size.SMALL;
+import static effective.ch2.item2.hierarchicalbuilder.Pizza.Topping.*;
 
 public class PizzaTest {
     public static void main(String[] args) {

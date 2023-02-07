@@ -1,4 +1,4 @@
-package effective.ch2.hierarchicalbuilder;
+package effective.ch2.item2.hierarchicalbuilder;
 
 import java.util.EnumSet;
 import java.util.Objects;
