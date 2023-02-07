@@ -1,6 +1,9 @@
 package effective.ch2.item3.field;
 
+
 public class Elvis {
+
+    //public static final 생성 방식
     public static final Elvis INSTANCE = new Elvis();
 
     private Elvis() { }
