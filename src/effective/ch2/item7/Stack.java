@@ -17,19 +17,19 @@ public class Stack {
         elements[size++] = e;
     }
 
-    public Object pop() {
-        if (size == 0)
-            throw new EmptyStackException();
-        return elements[--size];
-    }
-    //    // 코드 7-2 제대로 구현한 pop 메서드 (37쪽)
 //    public Object pop() {
 //        if (size == 0)
 //            throw new EmptyStackException();
-//        Object result = elements[--size];
-//        elements[size] = null; // 다 쓴 참조 해제
-//        return result;
+//        return elements[--size];
 //    }
+    //    // 코드 7-2 제대로 구현한 pop 메서드 (37쪽)
+    public Object pop() {
+        if (size == 0)
+            throw new EmptyStackException();
+        Object result = elements[--size];
+        elements[size] = null; // 다 쓴 참조 해제
+        return result;
+    }
 
     /**
      * 원소를 위한 공간을 적어도 하나 이상 확보한다.
@@ -42,8 +42,9 @@ public class Stack {
     }
 
     public static void main(String[] args) {
+        String[] s = {"10","1","dd"};
         Stack stack = new Stack();
-        for (String arg : args)
+        for (String arg : s)
             stack.push(arg);
 
         while (true)
