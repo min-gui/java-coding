@@ -6,6 +6,7 @@ import java.io.IOException;
 
 public class TopLineWithDefault {
 
+    //autoCloseable 로 구현된 객체만 자동으로 try-with-resources 를 써서 클로즈 할 수 있다.
     static String firstLineOfFile(String path, String defaultVal) {
         try (BufferedReader br = new BufferedReader(
                 new FileReader(path))) {
