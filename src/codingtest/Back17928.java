@@ -1,40 +1,41 @@
 package codingtest;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 import java.util.Stack;
 
 public class Back17928 {
 
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int size = Integer.valueOf(br.readLine());
-        String[] s = br.readLine().split(" ");
+        Scanner sc = new Scanner(System.in);
+        int size = sc.nextInt();
         int[] list = new int[size];
-        int[] resultList = new int[size];
+
         Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < size; i++) {
-            list[i] = Integer.parseInt(s[i]);
-            resultList[i] = -1;
+            list[i] = sc.nextInt();
         }
 
-        for (int i = 1; i < size; i++) {
-            stack.add(i - 1);
+        for (int i = 0; i < size; i++) {
 
-            while (!stack.isEmpty()) {
-                if (list[stack.peek()] < list[i])
-                    resultList[stack.pop()] = list[i];
-                else{
-                    break;
-                }
+
+            while (!stack.isEmpty() && list[stack.peek()] < list[i]) {
+                list[stack.pop()] = list[i];
             }
+            stack.push(i);
         }
 
-        for (int i : resultList) {
-            System.out.print(i +" ");
+        while (!stack.isEmpty()) {
+            list[stack.pop()] = -1;
         }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i : list) {
+            sb.append(i).append(' ');
+        }
+
+        System.out.println(sb);
     }
 
 
