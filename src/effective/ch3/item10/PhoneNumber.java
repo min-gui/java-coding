@@ -3,6 +3,7 @@ package effective.ch3.item10;
 
 public class PhoneNumber {
     //equals 메서드 기본. 전형적이다.
+    //특별한 경우가 아니면 equals 를 재정의 하지 말자.
     private final short areaCode, prefix, lineNum;
 
     public PhoneNumber(int areaCode, int prefix, int lineNum) {
