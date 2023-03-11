@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 public class StreamSlice {
     public static void main(String[] args) {
         userFilter();
-        useTakeWile();
+        useTakeWhile();
     }
 
     static void userFilter() {
@@ -28,7 +28,7 @@ public class StreamSlice {
         System.out.println(list);
     }
 
-    static void useTakeWile() {
+    static void useTakeWhile() {
         List<UserDto> userDtoList = Arrays.asList(
                 new UserDto(1, "name1", "man"),
                 new UserDto(0, "name0", "woman"),
