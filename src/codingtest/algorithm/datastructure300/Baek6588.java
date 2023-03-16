@@ -26,7 +26,7 @@ public class Baek6588 {
             if (n == 0) break;
 
 
-            for (int i = n; i > n/2 ; i--) {
+            for (int i = n; i > 0 ; i--) {
                 if (isPrime[i] == true) {
                     //소수 일때
                     int temp = n - i;

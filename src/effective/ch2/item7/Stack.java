@@ -47,6 +47,7 @@ public class Stack {
         for (String arg : s)
             stack.push(arg);
 
+        System.out.println();
         while (true)
             System.err.println(stack.pop());
     }
