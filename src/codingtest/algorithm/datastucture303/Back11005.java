@@ -1,4 +1,4 @@
-package codingtest.algorithm.datastructure301;
+package codingtest.algorithm.datastucture303;
 
 import java.util.Scanner;
 
