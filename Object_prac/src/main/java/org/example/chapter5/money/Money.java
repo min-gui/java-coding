@@ -1,4 +1,4 @@
-package org.example.money;
+package org.example.chapter5.money;
 
 import java.math.BigDecimal;
 import java.util.Objects;

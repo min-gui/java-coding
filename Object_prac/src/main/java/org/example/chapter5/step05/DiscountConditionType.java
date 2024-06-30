@@ -1,4 +1,4 @@
-package org.example.movie.step01;
+package org.example.chapter5.step05;
 
 public enum DiscountConditionType {
     SEQUENCE,       // 순번조건

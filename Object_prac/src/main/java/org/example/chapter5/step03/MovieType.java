@@ -1,4 +1,4 @@
-package org.example.movie.step01;
+package org.example.chapter5.step03;
 
 public enum MovieType {
     AMOUNT_DISCOUNT,    // 금액 할인 정책

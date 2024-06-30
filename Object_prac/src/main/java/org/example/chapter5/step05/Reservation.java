@@ -1,7 +1,6 @@
-package org.example.movie.step01;
+package org.example.chapter5.step05;
 
-
-import org.example.money.Money;
+import org.example.chapter5.money.Money;
 
 public class Reservation {
     private Customer customer;
