@@ -8,7 +8,7 @@ public class number1 {
         int total = 0;
 
         while (true) {
-            if (a % 5 != 0) {
+            if (a % 3 == 0 && a % 5 != 0) {
                 total += a;
             }
 
