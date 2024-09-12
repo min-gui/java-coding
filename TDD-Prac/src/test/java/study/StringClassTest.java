@@ -28,6 +28,18 @@ public class StringClassTest {
 
       }
 
+      @Test
+      @DisplayName("substring 테스트")
+      public void substringTest() throws Exception {
+
+          String ex = "abc";
+          String result = "abc".substring(1, ex.length() - 1);
+          Assertions.assertThat(result).isEqualTo("b");
+
+       }
+
+
+
 
 
 
