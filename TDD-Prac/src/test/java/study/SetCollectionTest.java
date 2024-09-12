@@ -4,6 +4,9 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -40,5 +43,12 @@ public class SetCollectionTest {
     }
 
 
+    @ParameterizedTest(name = "{displayName} {index}이 존재 하는지 확인")
+//    @CsvSource(value = {"1,true", "2,true", "3,true", "4,false", "5,false"})
+    @ValueSource(strings = {"1", "2", "3", "4", "5"})
+    @DisplayName("값 존재 여부 확인")
+    void contains_02(int value) {
+        Assertions.assertThat(integerSet).contains(value);
+    }
 
 }
