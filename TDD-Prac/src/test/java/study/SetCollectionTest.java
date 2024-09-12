@@ -35,7 +35,7 @@ public class SetCollectionTest {
     @DisplayName("Set 존재 확인")
     public void setTest02() throws Exception {
 
-        Assertions.assertThat(integerSet.contains(2)).isEqualTo(true);
+        Assertions.assertThat(integerSet).contains(1);
 
     }
 
