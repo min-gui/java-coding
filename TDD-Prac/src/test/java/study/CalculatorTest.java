@@ -35,5 +35,48 @@ public class CalculatorTest {
         assertThat(calculator.divide(-6, -3)).isEqualTo(2);
     }
 
+    @Test
+    public void 쉼표_구분자_sum() throws Exception {
+        int result = Calculator.splitSum("1,2,3");
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    public void 쉼표_콜론_구분자_sum() throws Exception {
+        int result = Calculator.splitSum("1,2:3");
+        assertThat(result).isEqualTo(6);
+    }
+
+
+    @Test
+    public void null_빈문자열_테스트() throws Exception {
+        int result = Calculator.splitSum(null);
+        assertThat(result).isEqualTo(0);
+
+        result = Calculator.splitSum(" ");
+        assertThat(result).isEqualTo(0);
+    }
+
+
+    @Test
+    public void 커스텀_구분자_sum() throws Exception {
+        int result = Calculator.splitSum("//;\n1;2;3");
+        assertThat(result).isEqualTo(6);
+    }
+
+    @Test
+    public void 음수값_에러_표출() throws Exception {
+        assertThatThrownBy(Calculator.splitSum("-1,2,3"))
+                .isExactlyInstanceOf(RuntimeException.class)
+                .hasMessageContaining("-2");
+
+    }
+
+    @Test
+    public void 숫자_하나일_경우() throws Exception {
+        int result = Calculator.splitSum("1");
+        assertThat(result).isEqualTo(1);
+
+    }
 
 }
