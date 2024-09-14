@@ -50,11 +50,11 @@ public class CalculatorTest {
 
     @Test
     public void null_빈문자열_테스트() throws Exception {
-        int result = Calculator.splitSum(null);
-        assertThat(result).isEqualTo(0);
+        assertThatThrownBy(() -> Calculator.splitSum(null))
+                .isExactlyInstanceOf(RuntimeException.class);
 
-        result = Calculator.splitSum(" ");
-        assertThat(result).isEqualTo(0);
+        assertThatThrownBy(() -> Calculator.splitSum("   "))
+                .isExactlyInstanceOf(RuntimeException.class);
     }
 
 
@@ -66,9 +66,9 @@ public class CalculatorTest {
 
     @Test
     public void 음수값_에러_표출() throws Exception {
-        assertThatThrownBy(Calculator.splitSum("-1,2,3"))
+        assertThatThrownBy(() -> Calculator.splitSum("-1,2,3"))
                 .isExactlyInstanceOf(RuntimeException.class)
-                .hasMessageContaining("-2");
+                .hasMessageContaining("-1");
 
     }
 
