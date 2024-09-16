@@ -17,7 +17,7 @@ public class RacingCar {
     }
 
     public void go(MoveStrategy moveStrategy, int num) {
-        int resultMoveNum = moveStrategy.moveNum(num);
+        int resultMoveNum = moveStrategy.moveDistance(num);
         position += resultMoveNum;
     }
 

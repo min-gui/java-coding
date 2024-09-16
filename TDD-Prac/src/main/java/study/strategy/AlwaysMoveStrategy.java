@@ -2,7 +2,7 @@ package study.strategy;
 
 public class AlwaysMoveStrategy implements MoveStrategy{
     @Override
-    public int moveNum(int num) {
+    public int moveDistance(int num) {
         return num;
     }
 }
