@@ -1,7 +1,7 @@
-package study.controller;
+package racing.controller;
 
-import study.service.RacingCarService;
-import study.view.InputView;
+import racing.service.RacingCarService;
+import racing.view.InputView;
 
 public class RacingCarController {
 

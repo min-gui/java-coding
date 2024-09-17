@@ -1,4 +1,4 @@
-package study.strategy;
+package racing.strategy;
 
 public class AlwaysNoMoveStrategy implements MoveStrategy {
     @Override

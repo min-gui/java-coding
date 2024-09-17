@@ -1,9 +1,8 @@
-package study.service;
+package racing.service;
 
-import study.domain.RacingCar;
-import study.strategy.RandomMoveStrategy;
-import study.util.RandomCountGenerator;
-import study.view.OutputView;
+import racing.view.OutputView;
+import racing.domain.RacingCar;
+import racing.strategy.RandomMoveStrategy;
 
 import java.util.List;
 

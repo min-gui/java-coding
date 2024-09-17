@@ -1,6 +1,6 @@
-package study.strategy;
+package racing.strategy;
 
-import study.domain.RacingCar;
+import racing.domain.RacingCar;
 
 import java.util.Random;
 

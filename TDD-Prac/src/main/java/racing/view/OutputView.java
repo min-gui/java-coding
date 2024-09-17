@@ -1,8 +1,7 @@
-package study.view;
+package racing.view;
 
-import study.domain.RacingCar;
+import racing.domain.RacingCar;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class OutputView {

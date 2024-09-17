@@ -1,7 +1,7 @@
-package study.domain;
+package racing.domain;
 
-import study.strategy.MoveStrategy;
-import study.util.RandomCountGenerator;
+import racing.strategy.MoveStrategy;
+import racing.util.RandomCountGenerator;
 
 import java.util.List;
 import java.util.stream.Collectors;
