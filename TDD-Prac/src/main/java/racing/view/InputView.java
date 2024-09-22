@@ -11,17 +11,18 @@ public class InputView {
 
     public static int inputCarNum() {
         System.out.println("자동차 대수는 몇 대 인가요?");
-        return SCANNER.nextInt();
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
     public static int inputRoundNum() {
         System.out.println("라운드 횟수는 몇 회 인가요?");
-        return SCANNER.nextInt();
+        return Integer.parseInt(SCANNER.nextLine());
     }
 
     public static String[] inputCarNames() {
         System.out.println("자동차 이름을 입력해주세요(쉼표 구분으로 (,) ,5글자 이내).");
-        String[] carNameList = SCANNER.nextLine().split(",");
+        String inputCarNames = SCANNER.nextLine();
+        String[] carNameList = inputCarNames.split(",");
         for (String car : carNameList){
             validationCarName(car);
         }

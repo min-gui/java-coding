@@ -13,7 +13,7 @@ class RacingCarServiceTest {
 
     @Test
     public void 레이싱카_이동_확인() throws Exception {
-        RacingCar racingCar = new RacingCar();
+        RacingCar racingCar = new RacingCar(0,"test1");
         MoveStrategy moveStrategy = new AlwaysMoveStrategy();
         racingCar.go(moveStrategy, 1);
 
@@ -22,7 +22,7 @@ class RacingCarServiceTest {
 
     @Test
     public void 레이싱카_이동_안함_확인() throws Exception {
-        RacingCar racingCar = new RacingCar();
+        RacingCar racingCar = new RacingCar(0,"test1");
         MoveStrategy moveStrategy = new AlwaysNoMoveStrategy();
         racingCar.go(moveStrategy, 1);
 

@@ -13,6 +13,7 @@ public class OutputView {
     public static void carsStatus(List<RacingCar> racingCars, int roundNum){
         System.out.println("-- "+roundNum+" --");
         for (RacingCar racingCar : racingCars){
+            printName(racingCar.getCarName());
             printPosition(racingCar.getPosition());
         }
     }
@@ -22,6 +23,10 @@ public class OutputView {
             System.out.print(POSITION_ICON);
         }
         System.out.println();
+    }
+
+    public static void printName(String carName){
+        System.out.print(carName + " : ");
     }
 
 }

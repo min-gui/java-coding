@@ -8,9 +8,9 @@ import java.util.List;
 
 public class RacingCarService {
 
-    public void processRacing(int carNum, int roundNum) {
+    public void processRacing(String[] carNames, int roundNum) {
 
-        List<RacingCar> racingCars = RacingCar.createRacingCars(carNum);
+        List<RacingCar> racingCars = RacingCar.createRacingCars(carNames);
         RandomMoveStrategy randomMoveStrategy = new RandomMoveStrategy();
         for (int i = 0; i < roundNum; i++) {
             for (RacingCar racingCar : racingCars) {
