@@ -23,7 +23,7 @@ public class RacingCarService {
         OutputView.printRacingWinner(winnerCars);
     }
 
-    private List<RacingCar> findWinnerCars(List<RacingCar> racingCars) {
+    public List<RacingCar> findWinnerCars(List<RacingCar> racingCars) {
         int maxPosition = racingCars.stream()
                 .mapToInt(RacingCar::getPosition)
                 .max()
