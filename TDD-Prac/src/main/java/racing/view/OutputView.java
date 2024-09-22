@@ -29,4 +29,10 @@ public class OutputView {
         System.out.print(carName + " : ");
     }
 
+    public static void printRacingWinner(List<RacingCar> racingCars){
+        System.out.print("최종 우승카 : ");
+        racingCars.stream()
+                .forEach(racingCar -> System.out.print(racingCar.getCarName() + ", "));
+    }
+
 }

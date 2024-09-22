@@ -5,6 +5,7 @@ import racing.domain.RacingCar;
 import racing.strategy.RandomMoveStrategy;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RacingCarService {
 
@@ -18,5 +19,17 @@ public class RacingCarService {
             }
             OutputView.carsStatus(racingCars, i);
         }
+        List<RacingCar> winnerCars = findWinnerCars(racingCars);
+        OutputView.printRacingWinner(winnerCars);
+    }
+
+    private List<RacingCar> findWinnerCars(List<RacingCar> racingCars) {
+        int maxPosition = racingCars.stream()
+                .mapToInt(RacingCar::getPosition)
+                .max()
+                .orElse(0);
+        return racingCars.stream()
+                .filter(racingCar -> racingCar.getPosition() == maxPosition)
+                .collect(Collectors.toList());
     }
 }
