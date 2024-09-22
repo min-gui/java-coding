@@ -8,6 +8,8 @@ public class OutputView {
 
     private static final String POSITION_ICON = " | ";
 
+    private OutputView() {}
+
     public static void carsStatus(List<RacingCar> racingCars, int roundNum){
         System.out.println("-- "+roundNum+" --");
         for (RacingCar racingCar : racingCars){
