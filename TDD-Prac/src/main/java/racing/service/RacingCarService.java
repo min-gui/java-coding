@@ -12,10 +12,9 @@ public class RacingCarService {
     public void processRacing(String[] carNames, int roundNum) {
 
         List<RacingCar> racingCars = RacingCar.createRacingCars(carNames);
-        RandomMoveStrategy randomMoveStrategy = new RandomMoveStrategy();
         for (int i = 0; i < roundNum; i++) {
             for (RacingCar racingCar : racingCars) {
-                racingCar.go(randomMoveStrategy, 1);
+                racingCar.go(new RandomMoveStrategy(), 1);
             }
             OutputView.carsStatus(racingCars, i);
         }
