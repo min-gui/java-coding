@@ -1,8 +1,7 @@
 package lotto.view;
 
-import lotto.domain.LottoTicket;
+import lotto.domain.LottoNumber;
 
-import java.util.IllformedLocaleException;
 import java.util.Scanner;
 
 public class InputView {
@@ -18,9 +17,9 @@ public class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public static LottoTicket buyLottoticket(int money) {
+    public static LottoNumber buyLottoticket(int money) {
         int lottoCnt = money / LOTTO_PRICE;
-        return new LottoTicket(lottoCnt);
+        return new LottoNumber(lottoCnt);
     }
 
     public static String inputWinningNumbers() {

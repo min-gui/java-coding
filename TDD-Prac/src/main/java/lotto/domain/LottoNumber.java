@@ -4,11 +4,11 @@ import lotto.util.RottoNumberUtil;
 
 import java.util.List;
 
-public class LottoTicket {
+public class LottoNumber {
 
     private final List<Integer> numbers;
 
-    public LottoTicket(int lottoNum) {
+    public LottoNumber(int lottoNum) {
         this.numbers = this.generateSortedLottoNumbers(lottoNum);
     }
 
