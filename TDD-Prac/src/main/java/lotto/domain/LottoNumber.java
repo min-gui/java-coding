@@ -18,7 +18,7 @@ public class LottoNumber {
         return lottoList;
     }
 
-    private int countMatchLottoNumber(List<Integer> winningNumbers) {
+    public int countMatchLottoNumber(List<Integer> winningNumbers) {
         return (int) numbers.stream()
                 .filter(winningNumbers::contains)
                 .count();
