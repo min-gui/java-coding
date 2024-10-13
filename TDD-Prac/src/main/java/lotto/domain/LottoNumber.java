@@ -24,4 +24,7 @@ public class LottoNumber {
                 .count();
     }
 
+    public String numberToString(){
+        return numbers.toString();
+    }
 }

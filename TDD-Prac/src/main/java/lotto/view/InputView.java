@@ -1,8 +1,12 @@
 package lotto.view;
 
 import lotto.domain.LottoNumber;
+import lotto.domain.LottoTicket;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class InputView {
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -17,9 +21,9 @@ public class InputView {
         return Integer.parseInt(SCANNER.nextLine());
     }
 
-    public static LottoNumber buyLottoticket(int money) {
+    public static LottoTicket buyLottoTicket(int money) {
         int lottoCnt = money / LOTTO_PRICE;
-        return new LottoNumber(lottoCnt);
+        return new LottoTicket(lottoCnt);
     }
 
     public static String inputWinningNumbers() {
@@ -42,6 +46,14 @@ public class InputView {
 
     static boolean isSixNumber(String winningNumbers) {
         return winningNumbers.split(DELIMITER).length == 6;
+    }
+
+    public static List<Integer> extractNumber(String strNumbers){
+        return Arrays.asList(strNumbers.split(DELIMITER))
+                .stream()
+                .filter(str -> str.matches("[0-9]+"))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
 
