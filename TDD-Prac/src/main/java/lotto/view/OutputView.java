@@ -27,10 +27,12 @@ public class OutputView {
     }
 
     public static void printWinStatics(Map<LottoRank, Long> winningResult){
-        winningResult.forEach((rank, count) -> {
-            if (rank.getMatchCount() >= 3)
-                System.out.println(MATCH_MSG.get(rank.getMatchCount()) + count + "개");
-        });
+        MATCH_MSG.entrySet().stream()
+                .forEach(entry ->{
+                    Long result = winningResult.get(LottoRank.valueOf(entry.getKey()));
+                    result = result == null ? 0 : result;
+                    System.out.println(entry.getValue() +  result + "개");
+                });
     }
 
     public static void printProfitRate(Map<LottoRank, Long> winningResult,int inputMoney){
