@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoRank;
+import lotto.domain.LottoResult;
 import lotto.domain.LottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -20,8 +21,10 @@ public class LottoController {
         List<Integer> winNumbers = InputView.extractNumber(inputWinningNumbers);
 
         Map<LottoRank, Long> winningResult = lottoTicket.findWinning(winNumbers);
-        OutputView.printWinStatics(winningResult);
-        OutputView.printProfitRate(winningResult, inputMoney);
+        LottoResult lottoResult = new LottoResult(winningResult);
+
+        OutputView.printWinStatics(lottoResult.getLottoRankMap());
+        OutputView.printProfitRate(lottoResult.getLottoRankMap(), inputMoney);
 
 
     }
