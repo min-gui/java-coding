@@ -56,5 +56,27 @@ public class InputView {
                 .collect(Collectors.toList());
     }
 
+    public static int inputBonusNumber(List<Integer> winningNumbers){
+        System.out.println("보너스 볼을 입력해주세요. ex) 1");
+
+        int bonusNumber = SCANNER.nextInt();
+        validateBonusNumber(winningNumbers, bonusNumber);
+
+        return bonusNumber;
+
+    }
+
+    public static void validateBonusNumber(List<Integer> winningNumbers, int bonusNumber){
+
+        if (!(bonusNumber >= 1 && bonusNumber <= 45)){
+            throw new IndexOutOfBoundsException("번호는 1~45중 하나 입니다.");
+        }
+
+        if (winningNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("보너스 볼이 당첨번호에 포함되어 있습니다.");
+        }
+
+    }
+
 
 }
