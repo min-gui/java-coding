@@ -26,6 +26,8 @@ public class LottoController {
         OutputView.printWinStatics(lottoResult.getLottoRankMap());
         OutputView.printProfitRate(lottoResult.getLottoRankMap(), inputMoney);
 
+        InputView.inputBonusNumber(winNumbers);
+
 
     }
 }
